@@ -27,12 +27,11 @@ private int dfs(int[][] grid,int r,int c){
 
 
 
-    int perimeter=1;
-    perimeter+=dfs(grid,r-1,c);
-    perimeter+=dfs(grid,r+1,c);
-    perimeter+=dfs(grid,r,c+1);
-    perimeter+=dfs(grid,r,c-1);
-    return perimeter;
+   return 1+
+   dfs(grid,r-1,c)+
+   dfs(grid,r+1,c)+
+   dfs(grid,r,c+1)+
+    dfs(grid,r,c-1);
 }
 
 

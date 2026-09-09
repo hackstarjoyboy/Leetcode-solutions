@@ -16,9 +16,9 @@ class Solution {
      }
      for(int num:nums){
         if(num!=max && num!=min){
-            max2= num;
+           return num;
         }
      }
-return max2;
+return -1;
     }    
 }

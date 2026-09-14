@@ -1,20 +1,16 @@
 class Solution {
     public int maxProduct(int n) {
-       List<Integer> ll=new ArrayList<>();
+        int m1=0;
+       int m2=0;
        while(n>0){
         int res=n%10;
         n/=10;
-        ll.add(res);
-       }
-       int m1=0;
-       int m2=0;
-       for(int num:ll){
-      if(m1<num){
+      if(m1<res){
         m2=m1;
-        m1=num;
+        m1=res;
       }
-      else if(num>m2){
-        m2=num;
+      else if(res>m2){
+        m2=res;
       }
 
        }

@@ -1,14 +1,14 @@
 class Solution {
     public int distributeCandies(int[] candyType) {
-        HashMap<Integer,Integer>map=new HashMap<>();
-        for(int candy:candyType){
-            map.put(candy,map.getOrDefault(candy,0)+1);
+        Set<Integer> set=new HashSet<>();
+        for(int n:candyType){
+            set.add(n);
         }
         int n=candyType.length;
-        if(map.size()>n/2){
+        if(set.size()>n/2){
             return n/2;
         }
-        return map.size();
+        return set.size();
 
     }
 }

@@ -1,39 +1,17 @@
 class MyHashSet {
-private LinkedList<Integer>[] buckets;
-private int size=1000;
-    public MyHashSet() {
-       buckets=new LinkedList[size];
-       for(int i=0;i<size;i++){
-        buckets[i]=new LinkedList<>();
-       } 
-    }
-    private int hash(int key){
-        return key%size;
-    }
-    
-    public void add(int key) {
-        int bucketIndex=hash(key);
-        if(!buckets[bucketIndex].contains(key)){
-            buckets[bucketIndex].add(key);
-        }
+private boolean[] data;
 
-    }
-    
-    public void remove(int key) {
-     int bucketIndex=hash(key);
-     buckets[bucketIndex].remove((Integer)key);
-
-    }
-    
-    public boolean contains(int key) {
-        return buckets[hash(key)].contains(key);
-    }
+public MyHashSet(){
+    data=new boolean[1000001];
+}
+public void add(int key){
+    data[key]=true;
+}
+public void remove(int key){
+ data[key]=false;
+}
+public boolean contains(int key){
+    return data[key];
 }
 
-/**
- * Your MyHashSet object will be instantiated and called as such:
- * MyHashSet obj = new MyHashSet();
- * obj.add(key);
- * obj.remove(key);
- * boolean param_3 = obj.contains(key);
- */
+}

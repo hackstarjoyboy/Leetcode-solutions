@@ -6,17 +6,20 @@ class Solution {
             return mat;
         }
         int[][] result = new int[r][c];
-        int[] arr = new int[row * col];
+       
+       
+        
+        
+        int matRow=0;
         int index = 0;
-        for (int[] nums : mat) {
-            for (int num : nums) {
-                arr[index++] = num;
-            }
-        }
-        index = 0;
         for (int i = 0; i < r; i++) {
             for (int j = 0; j < c; j++) {
-                result[i][j] = arr[index++];
+                result[i][j] = mat[matRow][index];
+                index++;
+                if(index==col){
+                    index=0;
+                    matRow++;
+                }
             }
         }
         return result;

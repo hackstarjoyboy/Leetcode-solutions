@@ -1,37 +1,27 @@
 class Solution {
-    
+
     public int[] shortestToChar(String s, char c) {
-        int[] result=new int[s.length()];
-        int count=0;
-      for(int i=0;i<s.length();i++){
-         if(s.charAt(i)==c){
-            count++;
-         }
-      }
-      int index=0;
-      int[] occurence=new int[count];
-      for(int i=0;i<s.length();i++){
-        if(s.charAt(i)==c){
-            occurence[index++]=i;
+        int n=s.length();
+        int[] result = new int[n];
+
+        int prev=-n;
+        for(int i=0;i<n;i++){
+            if(s.charAt(i)==c){
+                prev=i;
+            }
+            result[i]=i-prev;
         }
-      }
- index=0;
- int j=0;
- for(int i=0;i<s.length();i++){
-    result[index++]=reAns(occurence,i,count);
-    
- }
-  return result;
+        prev=2*n;
+        for(int i=n-1;i>=0;i--){
+            if(s.charAt(i)==c){
+                prev=i;
+            }
+            result[i]=Math.min(result[i],prev-i);
+        }
+
+return result;
+
+
     }
-    private int reAns(int[] occurence,int sInt,int count){
-   int nearest=Integer.MAX_VALUE;
-   int k=0;
-   while(k<count){
-    if(Math.abs(occurence[k]-sInt)<nearest){
-        nearest=Math.abs(occurence[k]-sInt);
-    }
-    k++;
-   }
-return nearest;
-    }
+
 }

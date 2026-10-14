@@ -13,6 +13,8 @@ class Solution {
         if(root==p || root==q){
             return root;
         }
+        if(p.left==q || p.right==q)return p;
+        if(q.left==p ||q.right==p) return q;
         TreeNode leftResult=lowestCommonAncestor(root.left,p,q);
         TreeNode rightResult=lowestCommonAncestor(root.right,p,q);
         if(leftResult!=null && rightResult!=null){

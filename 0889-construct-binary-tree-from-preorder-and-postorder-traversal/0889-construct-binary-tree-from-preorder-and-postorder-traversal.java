@@ -14,17 +14,27 @@
  * }
  */
 class Solution {
-    int preIndex=0;
-    int postIndex=0;
+    Map<Integer,Integer> postMap=new HashMap<>();
     public TreeNode constructFromPrePost(int[] preorder, int[] postorder) {
-        TreeNode root=new TreeNode(preorder[preIndex++]);
-        if(root.val!=postorder[postIndex]){
-            root.left=constructFromPrePost(preorder,postorder);
+        int n=postorder.length;
+        for(int i=0;i<n;i++){
+            postMap.put(postorder[i],i);
         }
-        if(root.val!=postorder[postIndex]){
-            root.right=constructFromPrePost(preorder,postorder);
+        return build(preorder,0,n-1,0,n-1);
+    }
+    private TreeNode build(int[] preorder ,int preStart,int preEnd,int postStart,int postEnd){
+        if(preStart>preEnd){
+            return null;
         }
-        postIndex++;
+        TreeNode root=new TreeNode(preorder[preStart]);
+        if(preStart==preEnd){
+            return root;
+        }
+        int leftVal=preorder[preStart+1];
+        int leftpostIndex=postMap.get(leftVal);
+        int leftSize=leftpostIndex-postStart+1;
+        root.left=build(preorder,preStart+1,preStart+leftSize,postStart,leftpostIndex);
+        root.right=build(preorder,preStart+leftSize+1,preEnd,leftpostIndex+1,postEnd-1);
         return root;
     }
 }

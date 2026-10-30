@@ -14,31 +14,22 @@
  *     }
  * }
  */
-import java.util.Stack;
+
 
 class Solution {
 
     public int rangeSumBST(TreeNode root, int low, int high) {
-      int sum = 0;
-        Stack<TreeNode> stack = new Stack<>();
-        if (root != null) {
-            stack.push(root);
-        }
-        while (!stack.isEmpty()) {
-            TreeNode node = stack.pop();
-            if (node != null) {
-                if (node.val >= low && node.val <= high)
-                    sum += node.val;
-            
-               if (node.val > low) {
-                stack.push(node.left);
-              }
-              if (node.val < high) {
-                stack.push(node.right);
-              }
-            }
-         }
-      return  sum;
+      if(root==null) return 0;
+
+
+      if(root.val>high){
+        return rangeSumBST(root.left,low,high);
+      }
+      if(root.val<low){
+        return rangeSumBST(root.right,low,high);
+      }
+      return root.val+rangeSumBST(root.left,low,high)+rangeSumBST(root.right,low,high);
+
     }
 
 }

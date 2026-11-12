@@ -1,22 +1,24 @@
 class Solution {
     public int numDecodings(String s) {
-       if(s==null||s.length()==0||s.charAt(0)=='0'){
+    if(s==null || s.length()==0||s.charAt(0)=='0'){
         return 0;
-       } 
-       int prev2=1;
-       int prev1=1;
-       for(int i=1;i<s.length();i++){
-        int current=0;
-        if(s.charAt(i)!='0'){
-            current+=prev1;
+
+    } 
+    int n=s.length();
+    int[] dp=new int[n+1];
+    dp[0]=1;
+    dp[1]=1;
+    for(int i=2;i<=n;i++){
+        int oneDigit=s.charAt(i-1)-'0';
+        int twoDigit=Integer.parseInt(s.substring(i-2,i));
+        if(oneDigit>=1){
+            dp[i]+=dp[i-1];
         }
-        int twoDigit=Integer.parseInt(s.substring(i-1,i+1));
         if(twoDigit>=10 && twoDigit<=26){
-            current+=prev2;
+            dp[i]+=dp[i-2];
         }
-        prev2=prev1;
-        prev1=current;
-       }
-       return prev1;
     }
+    return dp[n];
+    }
+
 }
